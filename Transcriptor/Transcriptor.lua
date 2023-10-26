@@ -2623,6 +2623,7 @@ end
 function Transcriptor:ClearAll()
 	if not logging then
 		TranscriptDB = {}
+		numEntriesWTF = 0
 		print(L["All transcripts cleared."])
 	else
 		print(L["You can't clear your transcripts while logging an encounter."])
