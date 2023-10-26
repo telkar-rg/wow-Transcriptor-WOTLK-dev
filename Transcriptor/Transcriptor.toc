@@ -10,7 +10,7 @@
 ## Notes-esES: Logging utility for boss encounters.
 ## Notes-esMX: Logging utility for boss encounters.
 ## Author: Funkydude
-## Version: 9.2.7
+## Version: 10.0.3
 ## X-Credits: Kyahx, Rabbit, MysticalOS, nebula169, Zidras
 ## X-Category: Development Tools
 ## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
@@ -18,11 +18,12 @@
 ## X-Curse-Project-ID: 14837
 ## SavedVariables: TranscriptIgnore, TranscriptDB, TranscriptOptions
 
-libs\LibStub.lua
-libs\CallbackHandler-1.0.lua
-libs\LibDataBroker-1.1.lua
-libs\LibDBIcon-1.0.lua
+Libs\LibStub.lua
+Libs\CallbackHandler-1.0.lua
+Libs\LibDataBroker-1.1.lua
+Libs\LibDBIcon-1.0.lua
 
-SpellBlacklist.lua
-SpecialEvents.lua
+Modules\PlayerSpellBlocklist.lua
+Modules\TimersBlocklist.lua
+Modules\TimersSpecialEvents.lua
 Transcriptor.lua
