@@ -5,6 +5,7 @@ local playerSpellBlacklist
 local badSourcelessPlayerSpellList
 local specialEvents
 local data = {}
+local numEntriesWTF = 0
 
 do
 	local n, tbl = ...
@@ -570,6 +571,8 @@ L["|cff696969Idle|r"] = "|cff7fffffIdle|r"
 L["|cffeda55fClick|r to start or stop transcribing. |cffeda55fRight-Click|r to configure events. |cffeda55fAlt-Middle Click|r to clear all stored transcripts."] = "|cffeda55fClick|r to start or stop transcribing.\n|cffeda55fRight-Click|r to configure events.\n|cffeda55fAlt-Middle Click|r to clear all stored transcripts."
 L["|cffFF0000Recording|r"] = "|cffFF0000Recording|r"
 L["|cFFFFD200Transcriptor|r - Disabled Events"] = "|cFFFFD200Transcriptor|r - Disabled Events"
+L["%d Transcripts"] = "%d |4Transcript:Transcripts;"
+L["%d to be saved after relog"] = "|cffFF0000%d saved after relog|r"
 
 do
 	local locale = GetLocale()
@@ -585,6 +588,8 @@ do
 		L["|cff696969Idle|r"] = "|cff7fffffStandby|r"
 		L["|cffeda55fClick|r to start or stop transcribing. |cffeda55fRight-Click|r to configure events. |cffeda55fAlt-Middle Click|r to clear all stored transcripts."] = "|cffeda55fKlicken|r, um eine Aufzeichnung zu starten oder zu stoppen.\n|cffeda55fRechts-Klicken|r, um Events zu konfigurieren.\n|cffeda55fAlt-Mittel-Klicken|r, um alle Aufzeichnungen zu löschen."
 		L["|cffFF0000Recording|r"] = "|cffFF0000Recording|r"
+		L["%d Transcripts"] = "%d |4Aufzeichnung:Aufzeichnungen;"
+		L["%d to be saved after relog"] = "|cffFF0000%d gespeichert nach Relog|r"
 		--L["|cFFFFD200Transcriptor|r - Disabled Events"] = "|cFFFFD200Transcriptor|r - Disabled Events"
 	elseif locale == "zhTW" then
 		L["You are already logging an encounter."] = "你已經準備記錄戰鬥"
@@ -599,6 +604,8 @@ do
 		L["|cff696969Idle|r"] = "|cff696969閒置|r"
 		L["|cffeda55fClick|r to start or stop transcribing. |cffeda55fRight-Click|r to configure events. |cffeda55fAlt-Middle Click|r to clear all stored transcripts."] = "|cffeda55f點擊|r開始/停止記錄戰鬥"
 		L["|cffFF0000Recording|r"] = "|cffFF0000記錄中|r"
+		L["%d Transcripts"] = "%d |4Transcript:Transcripts;"  -- TRANSLATE
+		L["%d to be saved after relog"] = "|cffFF0000%d saved after relog|r"  -- TRANSLATE
 		--L["|cFFFFD200Transcriptor|r - Disabled Events"] = "|cFFFFD200Transcriptor|r - Disabled Events"
 	elseif locale == "zhCN" then
 		L["You are already logging an encounter."] = "你已经准备记录战斗"
@@ -614,6 +621,8 @@ do
 		L["|cff696969Idle|r"] = "|cff696969空闲|r"
 		L["|cffeda55fClick|r to start or stop transcribing. |cffeda55fRight-Click|r to configure events. |cffeda55fAlt-Middle Click|r to clear all stored transcripts."] = "|cffeda55f点击|r开始/停止记录战斗."
 		L["|cffFF0000Recording|r"] = "|cffFF0000记录中|r"
+		L["%d Transcripts"] = "%d |4Transcript:Transcripts;"  -- TRANSLATE
+		L["%d to be saved after relog"] = "|cffFF0000%d saved after relog|r"  -- TRANSLATE
 		--L["|cFFFFD200Transcriptor|r - Disabled Events"] = "|cFFFFD200Transcriptor|r - Disabled Events"
 	elseif locale == "koKR" then
 		L["Remember to stop and start Transcriptor between each wipe or boss kill to get the best logs."] = "최상의 기록을 얻으려면 전멸이나 우두머리 처치 후에 Transcriptor를 중지하고 시작하는 걸 기억하세요."
@@ -627,6 +636,8 @@ do
 		L["|cff696969Idle|r"] = "|cff696969대기|r"
 		L["|cffeda55fClick|r to start or stop transcribing. |cffeda55fRight-Click|r to configure events. |cffeda55fAlt-Middle Click|r to clear all stored transcripts."] = "|cffeda55f클릭|r - 기록을 시작하거나 중지합니다.\n|cffeda55f오른쪽-클릭|r - 이벤트를 구성합니다.\n|cffeda55fAlt-가운데 클릭|r - 저장된 모든 기록을 초기화합니다."
 		L["|cffFF0000Recording|r"] = "|cffFF0000기록 중|r"
+		L["%d Transcripts"] = "%d |4Transcript:Transcripts;"  -- TRANSLATE
+		L["%d to be saved after relog"] = "|cffFF0000%d saved after relog|r"  -- TRANSLATE
 		L["|cFFFFD200Transcriptor|r - Disabled Events"] = "|cFFFFD200Transcriptor|r - 비활성된 이벤트"
 	elseif locale == "ruRU" then
 		L["Remember to stop and start Transcriptor between each wipe or boss kill to get the best logs."] = "Чтобы получить лучшие записи боя, не забудьте остановить и запустить Transcriptor между вайпом или убийством босса."
@@ -640,6 +651,8 @@ do
 		L["|cff696969Idle|r"] = "|cff696969Ожидание|r"
 		L["|cffeda55fClick|r to start or stop transcribing. |cffeda55fRight-Click|r to configure events. |cffeda55fAlt-Middle Click|r to clear all stored transcripts."] = "|cffeda55fЛКМ|r - запустить или остановить запись.\n|cffeda55fПКМ|r - настройка событий.\n|cffeda55fAlt-СКМ|r - очистить все сохраненные записи."
 		L["|cffFF0000Recording|r"] = "|cffFF0000Запись|r"
+		L["%d Transcripts"] = "%d |4Transcript:Transcripts;"  -- TRANSLATE
+		L["%d to be saved after relog"] = "|cffFF0000%d saved after relog|r"  -- TRANSLATE
 		--L["|cFFFFD200Transcriptor|r - Disabled Events"] = "|cFFFFD200Transcriptor|r - Disabled Events"
 	end
 end
@@ -1582,13 +1595,54 @@ local ldb = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject("Transcriptor"
 	text = L["|cff696969Idle|r"],
 	icon = "Interface\\AddOns\\Transcriptor\\icon_off",
 	OnTooltipShow = function(tt)
+		tt:SetMinimumWidth(400)
 		if logging then
+			tt:AddLine(L["|cffFF0000Recording|r"], 1, 1, 1, 1)
 			tt:AddLine(logName, 1, 1, 1, 1)
 		else
 			tt:AddLine(L["|cff696969Idle|r"], 1, 1, 1, 1)
 		end
 		tt:AddLine(" ")
 		tt:AddLine(L["|cffeda55fClick|r to start or stop transcribing. |cffeda55fRight-Click|r to configure events. |cffeda55fAlt-Middle Click|r to clear all stored transcripts."], 0.2, 1, 0.2, 1)
+		
+		-- local db = TranscriptDB
+		local ita,itb, i, m1,m2,m3,m4, numEntriesTxt, c2, cr,cg,cb, j
+		if TranscriptDB then
+			local t = {}
+			for logName, logTbl in pairs(TranscriptDB) do
+				m1,m2,m3,m4 = strmatch(logName, "^%[(.-)%]@%[(.-)%] %- Zone:(.-) = (.-/.-), Difficulty:")
+				if m4 then
+					m4 = gsub(m4,"/","/ ")
+					tinsert(t, format("%s %s [%s] %s", m1,m2,m3,m4))
+				end
+			end
+			sort(t)
+			
+			tt:AddLine(" ")
+			
+			numEntriesTxt = format(L["%d Transcripts"], #t)
+			if numEntriesWTF < #t then
+				numEntriesTxt = numEntriesTxt .." (".. format(L["%d to be saved after relog"], #t-numEntriesWTF) .. ")"
+			end
+			tt:AddLine(numEntriesTxt, nil, nil, nil, 1)
+			
+			ita = #t
+			itb = ita > 3 and ita-3 or 1
+			cr=1
+			cg=1
+			j=0
+			for i=ita, itb, -1 do
+				j = j+1
+				if j%2==0 then
+					cr,cg,cb = nil,nil,nil
+					c2 = "FF00bf00"
+				else
+					cr,cg,cb = 1,1,1
+					c2 = "FF40ff40"
+				end
+				tt:AddLine(format("  |c%s[%d]|r ",c2,i) .. t[i], cr,cg,cb, 1)
+			end
+		end
 	end,
 	OnClick = function(self, button)
 		if button == "LeftButton" then
@@ -1624,7 +1678,12 @@ init:SetScript("OnEvent", function(self, event)
 	if type(TranscriptDB) ~= "table" then TranscriptDB = {} end
 	if type(TranscriptIgnore) ~= "table" then TranscriptIgnore = {} end
 	if type(TranscriptOptions) ~= "table" then TranscriptOptions = {} end
-
+	
+	numEntriesWTF = 0
+	for _,_ in pairs(TranscriptDB) do
+		numEntriesWTF = numEntriesWTF+1
+	end
+	
 	tinsert(menu, { text = L["|cFFFFD200Transcriptor|r - Disabled Events"], fontObject = "GameTooltipHeader", notCheckable = 1 })
 	insertMenuItems(wowEvents)
 	if BigWigsLoader then insertMenuItems(bwEvents) end
