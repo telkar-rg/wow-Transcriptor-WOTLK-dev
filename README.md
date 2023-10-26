@@ -1,2 +1,2 @@
 # wow-Transcriptor-WOTLK-dev
-personal edit of Transcriptor for WotLK
+For usage, please refer to the original from [Zidras](https://github.com/Zidras/Transcriptor-WOTLK/)
